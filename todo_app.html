@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas To Do</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-main">
+        <!-- Header -->
+        <div class="bg-white rounded-t-2xl shadow-xl p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">📋 Mi Gestor de Tareas</h1>
+                <p class="text-gray-600">Organiza tu día de forma eficiente</p>
+            </div>
+
+            <!-- Contadores -->
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border-2 border-blue-200">
+                    <p class="text-sm font-semibold text-blue-600 mb-1">Tareas Pendientes</p>
+                    <p class="text-3xl font-bold text-blue-700" id="pending-count">0</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 border-2 border-green-200">
+                    <p class="text-sm font-semibold text-green-600 mb-1">Tareas Completadas</p>
+                    <p class="text-3xl font-bold text-green-700" id="completed-count">0</p>
+                </div>
+            </div>
+
+            <!-- Agregar Nueva Tarea -->
+            <div class="space-y-3 mb-6">
+                <div class="flex gap-2 flex-col sm:flex-row">
+                    <input type="text" id="task-input" placeholder="Escribe una nueva tarea..." 
+                        class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 transition">
+                    <select id="priority-select" class="px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500">
+                        <option value="Normal">Prioridad</option>
+                        <option value="Urgente">🔴 Urgente</option>
+                        <option value="Normal">🟢 Normal</option>
+                        <option value="Luego">🟠 Luego</option>
+                    </select>
+                    <button onclick="addTask()" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                        + Agregar
+                    </button>
+                </div>
+                <button onclick="downloadTasks()" class="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition font-medium text-sm">
+                    ⬇️ Descargar Lista
+                </button>
+            </div>
+
+            <!-- Filtros -->
+            <div class="flex gap-2 flex-wrap">
+                <button onclick="filterTasks('all')" class="filter-btn px-4 py-2 rounded-full bg-purple-600 text-white text-sm font-semibold transition hover:bg-purple-700">
+                    Todas
+                </button>
+                <button onclick="filterTasks('pending')" class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-semibold transition hover:bg-gray-300">
+                    Pendientes
+                </button>
+                <button onclick="filterTasks('completed')" class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-semibold transition hover:bg-gray-300">
+                    Completadas
+                </button>
+                <button onclick="filterTasks('Urgente')" class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-semibold transition hover:bg-gray-300">
+                    🔴 Urgente
+                </button>
+                <button onclick="filterTasks('Normal')" class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-semibold transition hover:bg-gray-300">
+                    🟢 Normal
+                </button>
+                <button onclick="filterTasks('Luego')" class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-semibold transition hover:bg-gray-300">
+                    🟠 Luego
+                </button>
+            </div>
+        </div>
+
+        <!-- Lista de Tareas -->
+        <div class="bg-gray-50 rounded-b-2xl shadow-xl divide-y" style="max-height: 600px; overflow-y: auto;">
+            <div id="task-list" class="divide-y">
+                <!-- Las tareas se cargarán aquí -->
+            </div>
+            <div id="empty-state" class="text-center py-12 text-gray-400">
+                <p class="text-lg">🎉 ¡No hay tareas! Agrega una nueva.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
